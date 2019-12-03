@@ -1,0 +1,2246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能家居Luxdomo自动化测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js"></script>
+    <!-- <script type="text/javascript" src="js/echarts.common.min.js"></script> -->
+    
+    
+<style type="text/css" media="screen">
+    body        { font-family: Microsoft YaHei,Consolas,arial,sans-serif; font-size: 80%; }
+    table       { font-size: 100%; }
+    pre         { white-space: pre-wrap;word-wrap: break-word; }
+
+    /* -- heading ---------------------------------------------------------------------- */
+    h1 {
+        font-size: 16pt;
+        color: gray;
+    }
+    .heading {
+        margin-top: 0ex;
+        margin-bottom: 1ex;
+    }
+
+    .heading .attribute {
+        margin-top: 1ex;
+        margin-bottom: 0;
+    }
+
+    .heading .description {
+        margin-top: 2ex;
+        margin-bottom: 3ex;
+    }
+
+    /* -- css div popup ------------------------------------------------------------------------ */
+    a.popup_link {
+    }
+
+    a.popup_link:hover {
+        color: red;
+    }
+
+    .popup_window {
+        display: none;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /*border: solid #627173 1px; */
+        padding: 10px;
+        /*background-color: #E6E6D6; */
+        font-family: "Lucida Console", "Courier New", Courier, monospace;
+        text-align: left;
+        font-size: 8pt;
+        /* width: 500px;*/
+    }
+
+    }
+    /* -- report ------------------------------------------------------------------------ */
+    #show_detail_line {
+        margin-top: 3ex;
+        margin-bottom: 1ex;
+    }
+    #result_table {
+        width: 99%;
+    }
+    #header_row {
+        font-weight: bold;
+        color: #303641;
+        background-color: #ebebeb;
+    }
+    #total_row  { font-weight: bold; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #6c6; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+
+
+    /* -- ending ---------------------------------------------------------------------- */
+    #ending {
+    }
+
+    #div_base {
+                position:absolute;
+                top:0%;
+                left:5%;
+                right:5%;
+                width: auto;
+                height: auto;
+                margin: -15px 0 0 0;
+    }
+</style>
+
+    
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+
+    /* level - 0:Summary; 1:Failed; 2:All */
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level < 1) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level > 1) {
+                    tr.className = '';
+                }
+                else {
+                    tr.className = 'hiddenRow';
+                }
+            }
+        }
+    }
+
+
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_'+tid).style.display = 'none'
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+
+
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        // alert(displayState)
+        if (displayState != 'block' ) {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+        else {
+            details_div.style.display = 'none'
+        }
+    }
+
+
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+
+    /* obsoleted by detail in <div>
+    function showOutput(id, name) {
+        var w = window.open("", //url
+                        name,
+                        "resizable,scrollbars,status,width=800,height=450");
+        d = w.document;
+        d.write("<pre>");
+        d.write(html_escape(output_list[id]));
+        d.write("\n");
+        d.write("<a href='javascript:window.close()'>close</a>\n");
+        d.write("</pre>\n");
+        d.close();
+    }
+    */
+    --></script>
+
+    <div id="div_base">
+        
+    <div class='page-header'>
+        <h1>智能家居Luxdomo自动化测试报告</h1>
+    <p class='attribute'><strong>开始时间:</strong> 2019-11-28 08:25:00</p>
+<p class='attribute'><strong>运行时长:</strong> 5:00:16.367280</p>
+<p class='attribute'><strong>状态:</strong> 通过 42 失败 2 错误 1</p>
+
+    </div>
+    <div style="float: left;width:50%;"><p class='description'>用例执行情况如下：</p></div>
+    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+
+        
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+    </div>
+    <p></p>
+    <table id='result_table' class="table table-bordered">
+        <colgroup>
+            <col align='left' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+        </colgroup>
+        <tr id='header_row'>
+            <td>测试套件/测试用例</td>
+            <td>总数</td>
+            <td>通过</td>
+            <td>失败</td>
+            <td>错误</td>
+            <td>查看</td>
+        </tr>
+        
+    <tr class='passClass'>
+        <td>Cloud.opinion_feedback.feedback_edit.feedback_edit: 意见反馈--问题编辑冒烟开始</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c1',1)">详情</a></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_feedback_edit</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        通过</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <pre>pt1.1: 1. 检测默认选择选项
+取出控制后的颜色进行对比...
+结果：按钮被选中
+2. 检测编辑框
+输入名称少于6个字符
+结果：反馈内容不少于6字
+输入名称上限（包括数字/中文/英文）
+结果：请选择问题设备
+3. 检测选择问题设备
+选择控制的设备名称为【双路窗帘控制面板1072】
+结果：选择问题设备正常
+4. 检测添加照片
+随机添加照片三张
+结果：最多只能添加3张照片
+5. 检测删除照片
+随机删除一张照片
+【确认要删除图片吗?】
+结果：删除一张照片后，存在添加照片按钮，正常
+6. 检测提交
+结果：提交成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Cloud.opinion_feedback.opinion_edit.opinion_edit: 意见反馈--建议编辑冒烟开始</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c2',1)">详情</a></td>
+    </tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_opinion_edit</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        通过</a>
+
+    <div id='div_pt2.1' class="popup_window">
+        <pre>pt2.1: 1. 检测选择选项
+取出控制后的颜色进行对比...
+结果：按钮未被选中
+2. 检测编辑框
+输入名称少于6个字符
+结果：反馈内容不少于6字
+输入名称上限（包括数字/中文/英文）
+3. 检测添加照片
+随机添加照片三张
+结果：最多只能添加3张照片
+4. 检测删除照片
+随机删除一张照片
+【确认要删除图片吗?】
+结果：删除一张照片后，存在添加照片按钮，正常
+5. 检测提交
+结果：提交成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Cloud.opinion_feedback.record_edit.record_edit: 意见反馈--记录编辑冒烟开始</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c3',1)">详情</a></td>
+    </tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_record_edit</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        通过</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <pre>pt3.1: 1. 检测是否有刚提交的记录
+结果：刚才提交的记录有存在
+2. 检测全选
+结果：全选成功
+3. 检测删除
+[确认删除选中的记录?]
+结果：删除成功
+界面显示为[下拉可以刷新, 最后更新：今天 08:34, 暂无历史记录 快提交您宝贵的意见吧, 上拉可以加载更多]
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.light.light_physical.light_physical: 灯--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c4',1)">详情</a></td>
+    </tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_light_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        通过</a>
+
+    <div id='div_pt4.1' class="popup_window">
+        <pre>pt4.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【1路智能开关面板da3d你3af23鸽e4】
+结果：名称上限可以保存（中/英/数字）
+【1路智能开关面板da3d你3af23鸽e4】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【民意】
+获取设备位置的文本【1楼民意】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 判断是否有接近感应
+无接近感应，跳过延时关闭验证
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.light.light_logic.Light_logic: 灯--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c5',1)">详情</a></td>
+    </tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_light_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        通过</a>
+
+    <div id='div_pt5.1' class="popup_window">
+        <pre>pt5.1: 进入设备的名称为【['3路智能开关面板你e353f3eb4你鸽']】
+【处于逻辑灯编辑界面】
+1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【灯3374我d4我c黑b他2f豹】
+结果：名称上限可以保存（中/英/数字）
+【处于逻辑灯编辑界面】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【民意】
+---同楼层检测---
+选择【默认房间】
+获取设备位置的文本【设备位置: 1楼 默认房间】
+将获取的文本与楼层房间进行拼接对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【设备位置: 2楼 pyrogen是】
+将获取的文本与楼层房间进行拼接对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 检测图标替换是否正常
+1.进入图标替换列表
+2.随机选择一个图标
+3.判断图标替换是否成功
+结果：图标替换正常
+6. 按键控制其它设备是否正常
+1.进入设备选择列表
+2.选择控制的设备名称为【窗帘4975嘻哈4嘻2棒eq】
+3.获取出物理设备页所有文本信息
+4.判断选择的设备文本是否在物理设备页显示
+结果：按键控制其它设备正常
+7. 隐藏是否正常
+1. 获取逻辑设备的名称【灯3374我d4我c黑b他2f】
+1.勾选隐藏
+2.返回主界面对比
+结果：对比到最后一个了，验证通过
+7. 关闭隐藏
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>leebus.light.light_interface.Light_interface: 灯--主界面编辑</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c6',1)">详情</a></td>
+    </tr>
+
+<tr id='ft6.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_light_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft6.1')" >
+        错误</a>
+
+    <div id='div_ft6.1' class="popup_window">
+        <pre>ft6.1: Traceback (most recent call last):
+  File "/Users/admin/PycharmProjects/luxdomoAutoIOS/testCase/leebus/light/light_interface.py", line 27, in test_light_interface
+    self.lightpage.enter_room_for_hide(CommonPage.default_roomName[-1])
+  File "/Users/admin/PycharmProjects/luxdomoAutoIOS/page/leebus/light/lightPage.py", line 249, in enter_room_for_hide
+    self.click_element(eles[0])
+TypeError: 'NoneType' object is not subscriptable
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.light.light_control.Linght_control: 灯--主界面所有灯控制</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c7',1)">详情</a></td>
+    </tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_light_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt7.1')" >
+        通过</a>
+
+    <div id='div_pt7.1' class="popup_window">
+        <pre>pt7.1: 1. 控制主页所有灯--打开
+主界面所有灯控制结束
+2. 向上滑动到最顶部
+3. 控制主页所有灯--关闭
+主界面所有灯控制结束
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.hiddenSwitch.hiddenSwitch_physical.hiddenSwitch_physical: 隐藏式--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c8',1)">详情</a></td>
+    </tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_hiddenSwitch_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt8.1')" >
+        通过</a>
+
+    <div id='div_pt8.1' class="popup_window">
+        <pre>pt8.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【隐藏式开关8我f豹我4我e你豹5你f】
+结果：名称上限可以保存（中/英/数字）
+【隐藏式开关8我f豹我4我e你豹5你f】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 验证开关类型是否正常
+随机选择开关类型【翘板开关】
+结果：开关类型正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.hiddenSwitch.hiddenSwitch_logic.hiddenSwitch_logic: 隐藏式--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c9',1)">详情</a></td>
+    </tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_hiddenSwitch_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt9.1')" >
+        通过</a>
+
+    <div id='div_pt9.1' class="popup_window">
+        <pre>pt9.1: 进入设备的名称为【['隐藏式开关8我f豹我4我e你豹5你f', '隐藏式开关8我f豹我4我e你豹5你f']】
+【处于逻辑灯编辑界面】
+1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【灯8482dac黑ee5ee4黑3】
+结果：名称上限可以保存（中/英/数字）
+【处于P1面板灯配置界面】
+2.选择控制的设备名称为【窗帘801黑鸽25ge2dd你】
+3.获取出物理设备页所有文本信息
+4.判断选择的设备文本是否在物理设备页显示
+结果：P1面板配置成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.dimmer.dimmer_physical.Dimmer_pyhsical: 调光灯--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c10',1)">详情</a></td>
+    </tr>
+
+<tr id='pt10.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_dimmer_pyhsical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt10.1')" >
+        通过</a>
+
+    <div id='div_pt10.1' class="popup_window">
+        <pre>pt10.1: 【1路调光开关面板】
+1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【调光灯da我3254我4黑52e22ffd豹】
+结果：名称上限可以保存（中/英/数字）
+【调光灯da我3254我4黑52e22ffd豹】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 判段是否有前沿调光按钮，有进行操作，无就跳过
+结果：无前沿调光，跳过
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.dimmer.dimmer_logic.Dimmer_logic: 调光--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c11',1)">详情</a></td>
+    </tr>
+
+<tr id='pt11.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_dimmer_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt11.1')" >
+        通过</a>
+
+    <div id='div_pt11.1' class="popup_window">
+        <pre>pt11.1: 【1路调光开关面板】
+【调光灯鸽豹5豹你鸽4e鸽5黑他4de】
+1. 点击隐藏，判断是否有弹框
+隐藏设备名称【调光灯385黑ce3我d我1】
+2. 在主页检测是否隐藏成功
+在主页遍历所有设备名称查看是否隐藏
+结果：对比到最后一个了，验证通过
+3. 取消隐藏
+4. 从主页进入控制页
+5. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【调光灯385黑cc1他af31】
+结果：名称上限可以保存（中/英/数字）
+6. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+7. 检测设备位置显示是否正确
+默认选择的房间为【哦去我上下坡时】
+---同楼层检测---
+选择【哦去我上下坡时】
+获取设备位置的文本【1楼哦去我上下坡时】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+8. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.dimmer.dimmer_interface.Dimmer_interface: 调光灯--主界面编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c12',1)">详情</a></td>
+    </tr>
+
+<tr id='pt12.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_dimmer_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt12.1')" >
+        通过</a>
+
+    <div id='div_pt12.1' class="popup_window">
+        <pre>pt12.1: 1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【调光灯4651我5dad黑黑】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【民意】
+结果：移动到功能正常
+3. 移动回默认房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.dimmer.dimmer_control.Dimmer_control: 调光灯--随机控制一个</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c13',1)">详情</a></td>
+    </tr>
+
+<tr id='pt13.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_dimmer_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt13.1')" >
+        通过</a>
+
+    <div id='div_pt13.1' class="popup_window">
+        <pre>pt13.1: 【1路调光开关面板】
+1. 打开调光灯，并判断是否控制成功
+结果：控制成功
+2. 关闭调光灯，并判断是否控制成功
+结果：控制成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.wind.wind_physical.Wind_physical: 新风--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c14',1)">详情</a></td>
+    </tr>
+
+<tr id='pt14.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_wind_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt14.1')" >
+        通过</a>
+
+    <div id='div_pt14.1' class="popup_window">
+        <pre>pt14.1: 【新风控制面板】
+1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【新风执行器a1c15cba5黑23edc4df2】
+结果：名称上限可以保存（中/英/数字）
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【默认房间】
+获取设备位置的文本【1楼默认房间】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.wind.wind_logic.Wind_logic: 新风--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c15',1)">详情</a></td>
+    </tr>
+
+<tr id='pt15.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_wind_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt15.1')" >
+        通过</a>
+
+    <div id='div_pt15.1' class="popup_window">
+        <pre>pt15.1: 【新风控制面板】
+1. 判断是否有添加面板按钮，有则是对接模块0，无则是两线新风1
+【新风执行器fe2我他a豹51c黑2鸽黑】
+1. 点击隐藏，判断是否有弹框
+隐藏设备名称【新风6735dd他豹3他b鸽】
+2. 在主页检测是否隐藏成功
+在主页遍历所有设备名称查看是否隐藏
+结果：对比到最后一个了，验证通过
+3. 取消隐藏
+4. 从主页进入控制页
+5. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【新风6735ddd13cf1a4他】
+结果：名称上限可以保存（中/英/数字）
+6. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+7. 检测设备位置显示是否正确
+默认选择的房间为【额屋头】
+---同楼层检测---
+选择【哦去我上下坡时】
+获取设备位置的文本【1楼哦去我上下坡时】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+8. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.wind.wind_interface.Wind_interface: 新风--主界面编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c16',1)">详情</a></td>
+    </tr>
+
+<tr id='pt16.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_wind_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt16.1')" >
+        通过</a>
+
+    <div id='div_pt16.1' class="popup_window">
+        <pre>pt16.1: 【新风控制面板】
+1. 判断是否有添加面板按钮，有则是对接模块0，无则是两线新风1
+【新风执行器a1c15cba5黑23edc4df2】
+1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【新风161开黑115b3你15】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【民意】
+结果：移动到功能正常
+3. 移动回默认房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.wind.wind_control.Wind_control: 新风--随机控制一个</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c17',1)">详情</a></td>
+    </tr>
+
+<tr id='pt17.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_wind_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt17.1')" >
+        通过</a>
+
+    <div id='div_pt17.1' class="popup_window">
+        <pre>pt17.1: 【新风控制面板】
+1. 判断是否有添加面板按钮，有则是对接模块0，无则是两线新风1
+【新风执行器a1c15cba5黑23edc4df2】
+1. 打开新风，并判断是否控制成功
+结果：新风控制成功
+2. 控制风速，并判断是否控制成功
+结果：风速控制成功
+3. 关闭新风，并判断是否控制成功
+结果：新风控制成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtain.curtain_physical.Curtain_physical: 窗帘--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c18',1)">详情</a></td>
+    </tr>
+
+<tr id='pt18.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtain_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt18.1')" >
+        通过</a>
+
+    <div id='div_pt18.1' class="popup_window">
+        <pre>pt18.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【单路窗帘控制面板5b2aca3黑你b44】
+结果：名称上限可以保存（中/英/数字）
+【单路窗帘控制面板5b2aca3黑你b44】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【额屋头】
+获取设备位置的文本【1楼额屋头】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 判断是否有接近感应
+无接近感应，跳过延时关闭验证
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtain.curtain_logic.Curtain_logic: 窗帘--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c19',1)">详情</a></td>
+    </tr>
+
+<tr id='pt19.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtain_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt19.1')" >
+        通过</a>
+
+    <div id='div_pt19.1' class="popup_window">
+        <pre>pt19.1: 【单路窗帘控制面板c嘿棒c棒cb嘻dc】
+1. 判断是zigbee窗帘还是两线窗帘面板
+隐藏窗帘名称【窗帘59312bb1鸽2acbff】
+2. 根据面板类型进行对应操作
+在主页遍历所有设备名称查看是否隐藏
+结果：对比到最后一个了，验证通过
+3. 如果是刚才是两线窗帘进行隐藏，则现在进行取消隐藏操作,否则执行pass
+结果：取消隐藏成功
+4. 从主页进入控制页
+5. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【窗帘59312b3bd黑黑豹】
+结果：名称上限可以保存（中/英/数字）
+6. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+7. 检测设备位置显示是否正确
+默认选择的房间为【也是醉了】
+---同楼层检测---
+选择【调色】
+获取设备位置的文本【1楼调色】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+8. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+9. 检测设置窗帘时长是否正常
+设置的窗帘时长为【22秒】
+结果：设置窗帘时长成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtain.curtain_interface.Curtain_interface: 窗帘--主界面编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c20',1)">详情</a></td>
+    </tr>
+
+<tr id='pt20.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtain_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt20.1')" >
+        通过</a>
+
+    <div id='div_pt20.1' class="popup_window">
+        <pre>pt20.1: 两线类型窗帘面板
+1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【窗帘59312babe他他2a5】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【磨破嘴皮】
+结果：移动到功能正常
+3. 移动回初始房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtain.curtain_control.Curtain_control: 窗帘--随机控制一个</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c21',1)">详情</a></td>
+    </tr>
+
+<tr id='pt21.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtain_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt21.1')" >
+        通过</a>
+
+    <div id='div_pt21.1' class="popup_window">
+        <pre>pt21.1: 两线类型窗帘面板
+1. 打开窗帘，并判断是否控制成功
+1. 点击[打开]，判断是否控制成功
+结果：控制成功
+1. 关闭窗帘，并判断是否控制成功
+1. 点击[关闭]，判断是否控制成功
+结果：控制成功
+1. 暂停窗帘，并判断是否控制成功
+1. 点击[暂停]，判断是否控制成功
+结果：控制成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtainMotor.curtainMotor_physical.curtainMotor_physical: 窗帘电机--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c22',1)">详情</a></td>
+    </tr>
+
+<tr id='pt22.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtainMotor_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt22.1')" >
+        通过</a>
+
+    <div id='div_pt22.1' class="popup_window">
+        <pre>pt22.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【窗帘电机8f黑fa1cbf2dc我c豹2f51】
+结果：名称上限可以保存（中/英/数字）
+【窗帘电机8f黑fa1cbf2dc我c豹2f51】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【调色】
+获取设备位置的文本【1楼调色】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtainMotor.curtainMotor_logic.curtainMotor_logic: 窗帘电机--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c23',1)">详情</a></td>
+    </tr>
+
+<tr id='pt23.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtainMotor_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt23.1')" >
+        通过</a>
+
+    <div id='div_pt23.1' class="popup_window">
+        <pre>pt23.1: 【窗帘电机8f黑fa1cbf2dc我c豹2f51】
+1. 点击隐藏，判断是否有弹框
+隐藏设备名称【窗帘8785】
+2. 在主页检测是否隐藏成功
+在主页遍历所有设备名称查看是否隐藏
+结果：对比到最后一个了，验证通过
+3. 取消隐藏
+4. 从主页进入控制页
+5. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【窗帘87853f2c豹他2你d】
+结果：名称上限可以保存（中/英/数字）
+6. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+7. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【默认房间】
+获取设备位置的文本【1楼默认房间】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+8. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+9. 检测按钮默认状态及控制
+结果：按钮默认关闭
+结果：按钮控制成功
+再控一次，按钮回到初始状态
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.curtainMotor.curtainMotor_interface.curtainMotor_interface: 窗帘电机--主界面编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c24',1)">详情</a></td>
+    </tr>
+
+<tr id='pt24.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_curtainMotor_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt24.1')" >
+        通过</a>
+
+    <div id='div_pt24.1' class="popup_window">
+        <pre>pt24.1: 1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【窗帘87853f2a34f豹你c】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【民意】
+结果：移动到功能正常
+3. 移动回默认房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td>leebus.curtainMotor.curtainMotor_control.curtainMotor_control: 窗帘电机--控制</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c25',1)">详情</a></td>
+    </tr>
+
+<tr id='ft25.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_curtainMotor_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft25.1')" >
+        失败</a>
+
+    <div id='div_ft25.1' class="popup_window">
+        <pre>ft25.1: 1. 打开窗帘，并判断是否控制成功
+1. 点击[打开]，判断是否控制成功
+结果：控制失败
+Traceback (most recent call last):
+  File "/Users/admin/PycharmProjects/luxdomoAutoIOS/testCase/leebus/curtainMotor/curtainMotor_control.py", line 42, in test_curtainMotor_control
+    self.assertEqual(0, result, '结果：控制失败')
+AssertionError: 0 != 1 : 结果：控制失败
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.scenePanel.scenePanel_physical.ScenePanel_physical: 多功能面板--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c26',1)">详情</a></td>
+    </tr>
+
+<tr id='pt26.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_scenePanel_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt26.1')" >
+        通过</a>
+
+    <div id='div_pt26.1' class="popup_window">
+        <pre>pt26.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【4路多功能我f1bc你53c鸽af我f22】
+结果：名称上限可以保存（中/英/数字）
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【民意】
+获取设备位置的文本【1楼民意】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 判断是否有接近感应
+无接近感应，跳过延时关闭验证
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.scenePanel.scenePanel_config.ScenePanel_config: 多功能面板--配置</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c27',1)">详情</a></td>
+    </tr>
+
+<tr id='pt27.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_scenePanel_config</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt27.1')" >
+        通过</a>
+
+    <div id='div_pt27.1' class="popup_window">
+        <pre>pt27.1: 1. 配置多功能面板--设备
+进入随机一个面板
+2.选择控制的设备名称为【灯1105我23豹我鸽11黑】
+3.获取出物理设备页所有文本信息
+4.判断选择的设备文本是否在物理设备页显示
+结果：多功能面板配置成功
+2. 配置多功能面板--场景
+进入随机一个面板
+2.选择控制的场景名称为【全开】
+3.获取出物理设备页所有文本信息
+4.判断选择的设备文本是否在物理设备页显示
+结果：多功能面板配置成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.output.output_physical.output_physical: 四路输出--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c28',1)">详情</a></td>
+    </tr>
+
+<tr id='pt28.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_output_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt28.1')" >
+        通过</a>
+
+    <div id='div_pt28.1' class="popup_window">
+        <pre>pt28.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【4路输出模块3a1fb鸽豹f黑d1b鸽豹】
+结果：名称上限可以保存（中/英/数字）
+【4路输出模块3a1fb鸽豹f黑d1b鸽豹】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【BUS指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【也是醉了】
+获取设备位置的文本【1楼也是醉了】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.output.output_main.output_main: 4路输出模块--逻辑设备配置和控制和移动</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c29',3)">详情</a></td>
+    </tr>
+
+<tr id='pt29.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test01_output_logic: 4路输出模块--逻辑设备配置</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt29.1')" >
+        通过</a>
+
+    <div id='div_pt29.1' class="popup_window">
+        <pre>pt29.1: 1. 对模块进行配置
+1.随机选择一个逻辑面板
+2.获取设备类型列表再随机选择一个
+3.选择【双路通用】
+弹出框的消息内容：【双路通用的配置需要用到CH1和CH2，CH1已经配置了灯753，是否替换?】
+结果：配置成功
+2. 检测显示位置是否正常
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【默认房间】
+获取设备位置的文本【1楼默认房间】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+3. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt29.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test02_output_control: 4路输出模块控制</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt29.2')" >
+        通过</a>
+
+    <div id='div_pt29.2' class="popup_window">
+        <pre>pt29.2: 1. 打开窗帘，并判断是否控制成功
+1. 点击[打开]，判断是否控制成功
+结果：控制成功
+2. 关闭窗帘，并判断是否控制成功
+1. 点击[关闭]，判断是否控制成功
+结果：控制成功
+3. 暂停窗帘，并判断是否控制成功
+1. 点击[暂停]，判断是否控制成功
+结果：控制成功
+4. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【额屋头】
+获取设备位置的文本【1楼额屋头】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+5. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+6. 检测设置窗帘时长是否正常
+设置的窗帘时长为【14秒】
+结果：设置窗帘时长成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt29.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test03_output_move: 4路输出模块移动</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt29.3')" >
+        通过</a>
+
+    <div id='div_pt29.3' class="popup_window">
+        <pre>pt29.3: 1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【双路通用754a414鸽豹1】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【哦去我上下坡时】
+结果：移动到功能正常
+3. 移动回默认房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.input.input_physical.input_physical: 六路输入--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c30',1)">详情</a></td>
+    </tr>
+
+<tr id='pt30.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_input_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt30.1')" >
+        通过</a>
+
+    <div id='div_pt30.1' class="popup_window">
+        <pre>pt30.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【6路输入模块我1a335你cd他c我ffa】
+结果：名称上限可以保存（中/英/数字）
+【6路输入模块我1a335你cd他c我ffa】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【BUS指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【额屋头】
+获取设备位置的文本【1楼额屋头】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.input.input_main.input_main: 6路输入模块--逻辑设备配置和控制和移动</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c31',2)">详情</a></td>
+    </tr>
+
+<tr id='pt31.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test01_input_logic: 6路输入模块--逻辑设备配置</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt31.1')" >
+        通过</a>
+
+    <div id='div_pt31.1' class="popup_window">
+        <pre>pt31.1: 1. 对模块进行配置
+1.随机选择一个逻辑面板
+2.获取设备类型列表再随机选择一个
+3.选择【其他类型】
+弹出框的消息内容：【更改后,原来设备相关联动将会同步删除】
+结果：配置成功
+2. 检测显示位置是否正常
+默认选择的房间为【民意】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+3. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+4. 检测推送按钮默认状态及控制
+结果：无推送按钮
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt31.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test02_input_interface: 6路输入模块--主界面编辑</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt31.2')" >
+        通过</a>
+
+    <div id='div_pt31.2' class="popup_window">
+        <pre>pt31.2: 选择【其他类型450】
+1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【其他类型450他豹ca豹2】
+结果：名称上限可以保存（中/英/数字）
+2. 检测显示位置是否正常
+默认选择的房间为【民意】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+3. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+4. 检测推送按钮默认状态及控制
+结果：按钮默认关闭
+结果：按钮控制成功
+再控一次，按钮回到初始状态
+5. 检验长按是否有菜单
+结果：长按正常，其它设备不能进入名称编辑/移动等
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.inoutput.inoutput_physical.inoutput_physical: 输入输出模块--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c32',1)">详情</a></td>
+    </tr>
+
+<tr id='pt32.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_inoutput_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt32.1')" >
+        通过</a>
+
+    <div id='div_pt32.1' class="popup_window">
+        <pre>pt32.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【Z i gB e e 输入输】
+结果：名称上限可以保存（中/英/数字）
+【Z i gB e e 输入输】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 检测开关类型是否正常
+开关类型为【复位开关】
+更改类型为【取消】
+获取更改后的开关类型【复位开关】
+结果：更改功能正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.inoutput.inoutput_main.inoutput_main: 输入输出模块--逻辑设备配置和控制和移动</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c33',2)">详情</a></td>
+    </tr>
+
+<tr id='pt33.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test01_inoutput_logic: 输出模块--逻辑设备配置</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt33.1')" >
+        通过</a>
+
+    <div id='div_pt33.1' class="popup_window">
+        <pre>pt33.1: 1. 对模块进行配置
+1.随机选择一个逻辑面板
+2.获取设备类型列表再随机选择一个
+3.选择【人体红外传感器】
+弹出框的消息内容：【更改后,原来设备相关联动将会同步删除】
+结果：配置成功
+2. 检测显示位置是否正常
+默认选择的房间为【磨破嘴皮】
+---同楼层检测---
+选择【民意】
+获取设备位置的文本【1楼民意】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+3. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+判断是否有推送按钮开关
+结果：无，跳过推送按钮推送
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt33.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test02_inoutput_interface: 输入输出模块--主界面编辑控制</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt33.2')" >
+        通过</a>
+
+    <div id='div_pt33.2' class="popup_window">
+        <pre>pt33.2: 选择【人体红外传感器8450】
+1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【人体红外传感器8450c2】
+结果：名称上限可以保存（中/英/数字）
+2. 检测显示位置是否正常
+默认选择的房间为【磨破嘴皮】
+---同楼层检测---
+选择【民意】
+获取设备位置的文本【1楼民意】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+3. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+4. 检测推送按钮默认状态及控制
+结果：按钮默认关闭
+结果：按钮控制成功
+再控一次，按钮回到初始状态
+5. 检验长按是否有菜单
+结果：长按正常，其它设备不能进入名称编辑/移动等
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.palette.palette_physical.palette_physical: 调色灯--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c34',1)">详情</a></td>
+    </tr>
+
+<tr id='pt34.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_palette_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt34.1')" >
+        通过</a>
+
+    <div id='div_pt34.1' class="popup_window">
+        <pre>pt34.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【Z i gB e e 调色灯8】
+结果：名称上限可以保存（中/英/数字）
+【Z i gB e e 调色灯8】
+2. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+3. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.palette.palette_logic.palette_logic: 调色灯--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c35',1)">详情</a></td>
+    </tr>
+
+<tr id='pt35.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_palette_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt35.1')" >
+        通过</a>
+
+    <div id='div_pt35.1' class="popup_window">
+        <pre>pt35.1: 【Z i gB e e 调色灯8】
+1. 点击隐藏，判断是否有弹框
+隐藏设备名称【调色灯8769】
+2. 在主页检测是否隐藏成功
+在主页遍历所有设备名称查看是否隐藏
+结果：对比到最后一个了，验证通过
+3. 取消隐藏
+4. 从主页进入控制页
+5. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【调色灯8769e5黑鸽db1】
+结果：名称上限可以保存（中/英/数字）
+6. 检测设备位置显示是否正确
+默认选择的房间为【默认房间】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+7. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.palette.palette_interface.palette_interface: 调色灯--主界面编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c36',1)">详情</a></td>
+    </tr>
+
+<tr id='pt36.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_palette_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt36.1')" >
+        通过</a>
+
+    <div id='div_pt36.1' class="popup_window">
+        <pre>pt36.1: 1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【调色灯8769e2ccffbf豹】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【哦去我上下坡时】
+结果：移动到功能正常
+3. 移动回默认房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td>leebus.palette.palette_control.palette_control: 调色灯--控制</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c37',1)">详情</a></td>
+    </tr>
+
+<tr id='ft37.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_palette_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft37.1')" >
+        失败</a>
+
+    <div id='div_ft37.1' class="popup_window">
+        <pre>ft37.1: 1. 打开调色灯并判断是否开启成功
+1.控一下开关
+2.获取出图标值进行判断
+结果：控制失败
+1.取出控制后的颜色
+Traceback (most recent call last):
+  File "/Users/admin/PycharmProjects/luxdomoAutoIOS/testCase/leebus/palette/palette_control.py", line 42, in test_palette_control
+    self.assertEqual(0, result, '结果：控制异常')
+AssertionError: 0 != 1 : 结果：控制异常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.485.FEF_physical.FEF_physical: 485--物理设备编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c38',1)">详情</a></td>
+    </tr>
+
+<tr id='pt38.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_FEF_physical</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt38.1')" >
+        通过</a>
+
+    <div id='div_pt38.1' class="popup_window">
+        <pre>pt38.1: 1. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【Z i gB e e 485对接】
+结果：名称上限可以保存（中/英/数字）
+【Z i gB e e 485对接】
+2. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+3. 检测设备位置显示是否正确
+默认选择的房间为【哦去我上下坡时】
+---同楼层检测---
+选择【恶意中伤】
+获取设备位置的文本【1楼恶意中伤】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+4. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+5. 判段是否有前沿调光按钮，有进行操作，无就跳过
+结果：无前沿调光，跳过
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.485.FEF_logic.FEF_logic: 485--逻辑设备冒烟</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c39',1)">详情</a></td>
+    </tr>
+
+<tr id='pt39.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_FEF_logic</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt39.1')" >
+        通过</a>
+
+    <div id='div_pt39.1' class="popup_window">
+        <pre>pt39.1: 【ZigBee 485对接模块413120】
+4. 从主页进入控制页
+5. 设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【地暖131215a3d鸽1a豹e】
+结果：名称上限可以保存（中/英/数字）
+6. 检测定位图标是否正常
+消息弹出框提示的内容【面板指示灯闪烁30秒 请留意设备位置】
+7. 检测设备位置显示是否正确
+默认选择的房间为【也是醉了】
+---同楼层检测---
+选择【调色】
+获取设备位置的文本【1楼调色】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+---不同楼层检测---
+选择【pyrogen是】
+获取设备位置的文本【2楼pyrogen是】
+将获取的文本与楼层房间进行对比
+结果：设备位置显示对应选择房间正确
+8. 检测滑动屏幕是否正常
+结果：屏幕滑动正常
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.485.FEF_interface.FEF_interface: 485--主界面编辑</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c40',1)">详情</a></td>
+    </tr>
+
+<tr id='pt40.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_FEF_interface</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt40.1')" >
+        通过</a>
+
+    <div id='div_pt40.1' class="popup_window">
+        <pre>pt40.1: 【ZigBee 485对接模块413120】
+1. 主界面长按设备名称编辑
+1.输入名称为空
+结果：空名称无法保存
+2.输入名称上限（包含数字、英文、中文）
+编辑后的新名称为【地暖1312154b1b331e你】
+结果：名称上限可以保存（中/英/数字）
+2. 主界面长按设备移动到功能检测
+随机选择当前房间列的房间【磨破嘴皮】
+结果：移动到功能正常
+3. 移动回默认房间
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>leebus.485.FEF_control.FEF_control: 485--随机控制一个</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c41',1)">详情</a></td>
+    </tr>
+
+<tr id='pt41.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_FEF_control</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt41.1')" >
+        通过</a>
+
+    <div id='div_pt41.1' class="popup_window">
+        <pre>pt41.1: 【ZigBee 485对接模块413120】
+1. 打开地暖，并判断是否控制成功
+结果：地暖控制成功
+2. 关闭地暖，并判断是否控制成功
+结果：地暖控制成功
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+        <tr id='total_row'>
+            <td>总计</td>
+            <td>45</td>
+            <td>42</td>
+            <td>2</td>
+            <td>1</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+        <div id='ending'>&nbsp;</div>
+        
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '测试执行情况',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            color: ['#95b75d', 'grey', '#b64645'],
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['通过','失败','错误']
+            },
+            series : [
+                {
+                    name: '测试执行情况',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:42, name:'通过'},
+                        {value:2, name:'失败'},
+                        {value:1, name:'错误'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    </div>
+</body>
+</html>

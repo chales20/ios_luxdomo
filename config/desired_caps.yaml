@@ -1,0 +1,11 @@
+---
+platformName: ios
+platformVersion: 10.3.1
+deviceName: iPhone 6 Plus
+udid: e74bbfb270acdb2b4b3fc42b0476c791836f46b7
+bundleId: com.leelen.luxdomo
+noReset: Ture
+unicodeKeyboard: Ture
+resetkeyboard: Ture
+ip: 127.0.0.1
+port: 4723
